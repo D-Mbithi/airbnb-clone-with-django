@@ -22,7 +22,6 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -32,13 +31,18 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
+
+# Third party libraries
 THIRD_PARTY_APPS = [
-    # Third party libraries
+    'django_countries',
 ]
 
+
+# Local apps
 PROJECT_APPS = [
-    # Local apps
-    'users',
+    'core.apps.CoreConfig',
+    'users.apps.UsersConfig',
+    'rooms.apps.RoomsConfig',
 ]
 
 
