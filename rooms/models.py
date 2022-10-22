@@ -27,14 +27,14 @@ class RoomType(AbstractItem):
 class Amenity(AbstractItem):
 
     class Meta:
-        verbose_name = "Amenity"
+        verbose_name        = "Amenity"
         verbose_name_plural = 'Amenities'
 
 
 class Facility(AbstractItem):
 
     class Meta:
-        verbose_name = 'Facility'
+        verbose_name        = 'Facility'
         verbose_name_plural = 'Facilities'
 
 
@@ -47,8 +47,8 @@ class HouseRule(AbstractItem):
 
 class Photo(TimeStampedModel):
     caption = models.CharField(max_length=100)
-    file = models.ImageField()
-    room = models.ForeignKey("Room", on_delete=models.CASCADE)
+    file    = models.ImageField()
+    room    = models.ForeignKey("Room", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.caption
