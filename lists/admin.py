@@ -4,5 +4,5 @@ from .models import List
 
 # Register your models here.
 @admin.register(List)
-class List(admin.ModelAdmin):
+class ListAdmin(admin.ModelAdmin):
     pass
