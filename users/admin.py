@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
-# Register your models here.
 
+# Register your models here.
 
 
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
-    """ Custom User Admin """
+    """Custom User Admin"""
 
     fieldsets = UserAdmin.fieldsets + (
         (
@@ -20,8 +20,23 @@ class CustomUserAdmin(UserAdmin):
                     "birth_date",
                     "language",
                     "currency",
-                    "superhost"
+                    "superhost",
                 )
-            }
+            },
         ),
     )
+
+    list_display = [
+        "username",
+        "first_name",
+        "last_name",
+        "email",
+        "is_active",
+        "language",
+        "currency",
+        "super_host",
+        "is_staff",
+        "is_superuser",
+    ]
+
+    list_filter = UserAdmin.list_filter + ("super_host",)
