@@ -8,10 +8,20 @@ class Conversation(TimeStampedModel):
     Conversation model Defination
     """
 
-    paticipants = models.ManyToManyField("users.User", blank=True)
+    participants = models.ManyToManyField("users.User", blank=True)
 
     def __str__(self):
-        return self.created
+
+        usernames = ", ".join([user.username for user in self.participants.all()])
+        return str(usernames)
+
+    def count_messages(self):
+        return self.messages.count()
+
+    count_messages.short_description = "Number of messages"
+
+    def count_participants(self):
+        return self.participants.count()
 
 
 class Message(TimeStampedModel):
@@ -22,7 +32,7 @@ class Message(TimeStampedModel):
     message = models.TextField()
     user = models.ForeignKey("users.User", on_delete=models.CASCADE)
     conversation = models.ForeignKey(
-        "conversations.Conversation", on_delete=models.CASCADE
+        "conversations.Conversation", related_name="messages", on_delete=models.CASCADE
     )
 
     def __str__(self):
