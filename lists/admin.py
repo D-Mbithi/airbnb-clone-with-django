@@ -5,4 +5,10 @@ from .models import List
 # Register your models here.
 @admin.register(List)
 class ListAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["name", "user", "count_rooms"]
+
+    filter_horizontal = ["rooms"]
+
+    search_fields = [
+        "name",
+    ]
