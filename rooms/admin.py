@@ -54,6 +54,7 @@ class RoomAdmin(admin.ModelAdmin):
         "room_type",
         "count_amenities",
         "count_photos",
+        "total_rating",
     ]
     search_fields = ["=city", "host__usernames"]
     list_filter = [
@@ -79,7 +80,7 @@ class RoomAdmin(admin.ModelAdmin):
     count_amenities.short_description = "Amenity"
 
     def count_photos(self, obj):
-        return object.photos.count()
+        return obj.photos.count()
 
     count_photos.short_description = "Photos"
 
