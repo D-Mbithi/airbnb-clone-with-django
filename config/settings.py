@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 
 # Load env config files
-load_dotenv('.env')
+load_dotenv(".env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,13 +12,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-y8e2+0@i3m)f5tnfb+c%2zn8urw#dm!riiwp(38igh^@(3_2(#"
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 DJANGO_APPS = [
@@ -33,26 +33,26 @@ DJANGO_APPS = [
 
 # Third party libraries
 THIRD_PARTY_APPS = [
-    'django_countries',
+    "django_countries",
 ]
 
 
 # Local apps
 PROJECT_APPS = [
-    'core.apps.CoreConfig',
-    'users.apps.UsersConfig',
-    'rooms.apps.RoomsConfig',
-    'reviews.apps.ReviewsConfig',
-    'reservations.apps.ReservationsConfig',
-    'lists.apps.ListsConfig',
-    'conversations.apps.ConversationsConfig',
+    "core.apps.CoreConfig",
+    "users.apps.UsersConfig",
+    "rooms.apps.RoomsConfig",
+    "reviews.apps.ReviewsConfig",
+    "reservations.apps.ReservationsConfig",
+    "lists.apps.ListsConfig",
+    "conversations.apps.ConversationsConfig",
 ]
 
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = "users.User"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -69,9 +69,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            BASE_DIR / 'templates'
-        ],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -102,10 +100,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator", },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 
@@ -124,14 +130,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
-MEDIA_URL = "media/"
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
