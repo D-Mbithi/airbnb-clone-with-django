@@ -34,6 +34,7 @@ DJANGO_APPS = [
 # Third party libraries
 THIRD_PARTY_APPS = [
     "django_countries",
+    "django_seed",
 ]
 
 
