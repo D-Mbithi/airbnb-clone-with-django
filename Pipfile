@@ -15,6 +15,7 @@ psycopg2-binary = "*"
 [dev-packages]
 flake8 = "*"
 black = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.7"

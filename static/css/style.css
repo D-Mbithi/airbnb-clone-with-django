@@ -1,0 +1,38 @@
+body {
+    font-size: 14px;
+    font-family: 'Segoe UI', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+}
+nav {
+    background: #67829c;
+}
+
+nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+nav .container > ul {
+    display: flex;
+    gap: 20px;
+}
+
+nav .container a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav .container form input{
+    border: none;
+    border-radius: .5rem;
+    padding: .5rem 1rem;
+}
+
+.container {
+    max-width: 1400px;
+    margin-inline: auto;
+}
+

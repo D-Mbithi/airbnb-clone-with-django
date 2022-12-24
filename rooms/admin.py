@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import mark_safe
-from .models import Room, RoomType, HouseRule, Amenity, Facility, Photo
+
+from .models import Amenity, Facility, HouseRule, Photo, Room, RoomType
 
 
 # Register your models here.
@@ -41,16 +42,44 @@ class RoomAdmin(admin.ModelAdmin):
                 )
             },
         ),
-        ("Times", {"fields": ("checkin", "checkout", "instant_book")}),
-        ("Spaces", {"fields": ("guest", "bedrooms", "beds", "bath")}),
+        (
+            "Times",
+            {
+                "fields": (
+                    "checkin",
+                    "checkout",
+                    "instant_book",
+                ),
+            },
+        ),
+        (
+            "Spaces",
+            {
+                "fields": (
+                    "guest",
+                    "bedrooms",
+                    "beds",
+                    "bath",
+                ),
+            },
+        ),
         (
             "More about spaces",
             {
                 "classes": ("collapse",),
-                "fields": ("amenities", "facilities", "house_rules"),
+                "fields": (
+                    "amenities",
+                    "facilities",
+                    "house_rules",
+                ),
             },
         ),
-        ("Last details", {"fields": ("host",)}),
+        (
+            "Last details",
+            {
+                "fields": ("host",),
+            },
+        ),
     )
 
     list_display = [

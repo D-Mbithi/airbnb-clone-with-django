@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}| DBnB</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="container">
+                {% include 'partials/nav.html' %}
+                {% block search %}
+                <form action="{% url 'rooms:search' %}" method="get">
+                    <input type="text" name="search" id="search" placeholder="Search by city">
+                </form>
+                {% endblock search %}
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <!-- Main Section -->
+        {% block content %}{% endblock content %}
+    </main>
+</body>
+</html>
