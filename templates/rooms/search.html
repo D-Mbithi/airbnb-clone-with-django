@@ -10,6 +10,7 @@
 
 
 {% block content %}
+<section>
     <h4>Search</h4>
     <p>
         Searchings room in {{city}} City.
@@ -18,13 +19,14 @@
         {{ form.as_p}}
         <button>Search</button>
     </form>
+</section>
 
-    <div>
-        <h3>Search results</h3>
-        {% for room in rooms %}
-            <p>
-                {{ room.name }}
-            </p>
-        {% endfor %}
-    </div>
+<section>
+    <h3>Search results</h3>
+    {% for room in rooms %}
+        <p>
+            {{ room.name }}
+        </p>
+    {% endfor %}
+</section>
 {% endblock content %}
