@@ -13,3 +13,11 @@
                 <a href="{% url 'rooms:search' %}">Search</a>
             </li>
         </ul>
+        <ul>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                {{user.get_full_name}}
+            {% else %}
+                <li><a href="{% url 'users:login' %}">Sign Up</a></li>
+            {% endif %}
+        </ul>
