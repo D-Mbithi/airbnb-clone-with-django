@@ -3,7 +3,7 @@ from django.urls import reverse
 from django_countries.fields import CountryField
 
 from core.models import TimeStampedModel
-from users.models import User
+from users.models import CustomUser
 
 
 class AbstractItem(TimeStampedModel):
@@ -79,7 +79,7 @@ class Room(TimeStampedModel):
     checkout = models.TimeField()
     instant_book = models.BooleanField(default=False)
     host = models.ForeignKey(
-        User,
+        CustomUser,
         related_name="room",
         on_delete=models.CASCADE,
     )

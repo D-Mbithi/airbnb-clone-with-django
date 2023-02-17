@@ -1,17 +1,16 @@
 import random
 from datetime import datetime, timedelta
 
-from django.core.management.base import BaseCommand
 from django.contrib.admin.utils import flatten
-
+from django.core.management.base import BaseCommand
 from django_seed import Seed
 
 from reservations import models as reservation_model
-from users import models as user_model
 from rooms import models as room_model
-
+from users import models as user_model
 
 NAME = "Reservations"
+
 
 class Command(BaseCommand):
     help = f"This command helps create {NAME} data."
@@ -27,20 +26,24 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         number = options.get("number")
         rooms = room_model.Room.objects.all()
-        guests = user_model.User.objects.all()
+        guests = user_model.CustomUser.objects.all()
         seeder = Seed.seeder()
 
         seeder.add_entity(
             reservation_model.Reservation,
-            number, 
-            {   
-                "status": lambda x: random.choice(['pending', 'confirmed', 'cancelled']),
+            number,
+            {
+                "status": lambda x: random.choice(
+                    ["pending", "confirmed", "cancelled"]
+                ),
                 "room": lambda x: random.choice(rooms),
                 "guest": lambda x: random.choice(guests),
-                "check_in": lambda x: datetime.now() + timedelta(days=random.randint(0, 5)),
-                "check_out": lambda x: datetime.now() + timedelta(days=random.randint(5, 25)),
-            }
+                "check_in": lambda x: datetime.now()
+                + timedelta(days=random.randint(0, 5)),
+                "check_out": lambda x: datetime.now()
+                + timedelta(days=random.randint(5, 25)),
+            },
         )
-        seeder.execute()             
+        seeder.execute()
 
         self.stdout.write(self.style.SUCCESS(f"{NAME} created."))

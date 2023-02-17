@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+
 from core.models import TimeStampedModel
 
 
@@ -22,7 +23,7 @@ class Reservation(TimeStampedModel):
     )
     check_in = models.DateField()
     check_out = models.DateField()
-    guest = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    guest = models.ForeignKey("users.CustomUser", on_delete=models.CASCADE)
     room = models.ForeignKey("rooms.Room", on_delete=models.CASCADE)
 
     def __str__(self):
@@ -39,4 +40,5 @@ class Reservation(TimeStampedModel):
 
         return now >= self.check_out
 
+    is_finished.boolean = True
     is_finished.boolean = True

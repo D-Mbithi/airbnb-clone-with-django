@@ -1,4 +1,5 @@
 from django.db import models
+
 from core.models import TimeStampedModel
 
 
@@ -8,7 +9,7 @@ class Conversation(TimeStampedModel):
     Conversation model Defination
     """
 
-    participants = models.ManyToManyField("users.User", blank=True)
+    participants = models.ManyToManyField("users.CustomUser", blank=True)
 
     def __str__(self):
 
@@ -30,10 +31,13 @@ class Message(TimeStampedModel):
     """
 
     message = models.TextField()
-    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    user = models.ForeignKey("users.CustomUser", on_delete=models.CASCADE)
     conversation = models.ForeignKey(
-        "conversations.Conversation", related_name="messages", on_delete=models.CASCADE
+        "conversations.Conversation",
+        related_name="messages",
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):
+        return f"{self.user} Says: {self.message}"
         return f"{self.user} Says: {self.message}"

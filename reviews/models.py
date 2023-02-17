@@ -1,4 +1,5 @@
 from django.db import models
+
 from core.models import TimeStampedModel
 
 
@@ -16,7 +17,7 @@ class Review(TimeStampedModel):
         "rooms.Room", related_name="reviews", on_delete=models.CASCADE
     )
     user = models.ForeignKey(
-        "users.User", related_name="host", on_delete=models.CASCADE
+        "users.CustomUser", related_name="host", on_delete=models.CASCADE
     )
 
     def __str__(self):
@@ -37,4 +38,5 @@ class Review(TimeStampedModel):
             / 6
         )
 
+        return round(avg, 2)
         return round(avg, 2)

@@ -31,13 +31,11 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-
 # Third party libraries
 THIRD_PARTY_APPS = [
     "django_countries",
     "django_seed",
 ]
-
 
 # Local apps
 PROJECT_APPS = [
@@ -50,11 +48,12 @@ PROJECT_APPS = [
     "conversations.apps.ConversationsConfig",
 ]
 
-
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
+AUTH_USER_MODEL = "users.CustomUser"
 
-AUTH_USER_MODEL = "users.User"
+LOGIN_REDIRECT_URL = "core:home"
+LOGOUT_REDIRECT_URL = "users:login"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -85,7 +84,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

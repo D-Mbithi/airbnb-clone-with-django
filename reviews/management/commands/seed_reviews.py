@@ -1,9 +1,11 @@
 import random
+
 from django.core.management.base import BaseCommand
 from django_seed import Seed
+
 from reviews.models import Review
-from users import models as user_model
 from rooms import models as room_model
+from users import models as user_model
 
 
 class Command(BaseCommand):
@@ -20,11 +22,12 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         number = options.get("number")
         rooms = room_model.Room.objects.all()
-        users = user_model.User.objects.all()
+        users = user_model.CustomUser.objects.all()
         seeder = Seed.seeder()
         seeder.add_entity(
             Review,
-            number, {
+            number,
+            {
                 # "review": seeder.faker.sentence(),
                 "accuracy": lambda x: random.randint(1, 6),
                 "cleanliness": lambda x: random.randint(1, 6),
@@ -34,7 +37,9 @@ class Command(BaseCommand):
                 "value": lambda x: random.randint(1, 6),
                 "room": lambda x: random.choice(rooms),
                 "user": lambda x: random.choice(users),
-            }
+            },
         )
+        seeder.execute()
+        self.stdout.write(self.style.SUCCESS("Reviews created."))
         seeder.execute()
         self.stdout.write(self.style.SUCCESS("Reviews created."))
