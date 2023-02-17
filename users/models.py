@@ -1,9 +1,17 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+
+from .managers import CustomUserManager
 
 
-class User(AbstractUser):
+class CustomUser(AbstractUser):
     """Custom user model."""
+
+    username = None
+    email = models.EmailField(_("Email Address"), unique=True)
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
 
     # Gender choices
     GENDER_MALE = "male"
@@ -45,10 +53,18 @@ class User(AbstractUser):
         choices=LANGUAGE_CHOICES,
         max_length=2,
         blank=True,
+        default=LANGUAGE_ENGLISH,
     )
     currency = models.CharField(
         choices=CURRENCY_CHOICES,
         max_length=3,
         blank=True,
+        default=CURRENCY_USD,
     )
     super_host = models.BooleanField(default=False)
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        full_name = f"{self.first_name} {self.last_name}".title()
+        return full_name

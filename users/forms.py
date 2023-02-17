@@ -1,28 +1,55 @@
 from django import forms
+from django.contrib.auth.forms import (
+    ReadOnlyPasswordHashField,
+    UserChangeForm,
+    UserCreationForm,
+)
 
-from . import models
+from .models import CustomUser
 
 
-class LoginForms(forms.Form):
-    """Login form defination."""
+class CustomUserCreationForm(UserCreationForm):
+    """
+    A form for creating new users. Includes all the required fields.
+    """
 
-    email = forms.EmailField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label="Password confirmation", widget=forms.PasswordInput
+    )
 
-    def clean(self):
-        email = self.cleaned_data.get("email")
-        password = self.cleaned_data.get("password")
-        try:
-            user = models.User.objects.get(email=email)
-            if user.check_password(password):
-                return self.cleaned_data
-            else:
-                self.add_error(
-                    "password",
-                    forms.ValidationError("Username/Password does not exist"),
-                )
-        except models.User.DoesNotExist:
-            self.add_error(
-                "email",
-                forms.ValidationError("Username/Password does not exist"),
-            )
+    class Meta:
+        model = CustomUser
+        fields = ("first_name", "last_name", "email")
+
+    def clean_password2(self) -> str:
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+
+        if password1 and password2 and password1 != password2:
+            raise ValueError("Password don't match")
+        return super().clean_password2()
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data.get("password2"))
+
+        if commit:
+            user.save()
+        return user
+
+
+class CustomUserChangeForm(UserChangeForm):
+    """Custom user change form."""
+
+    password = ReadOnlyPasswordHashField()
+
+    class Meta:
+        model = CustomUser
+        fields = (
+            "first_name",
+            "last_name",
+            "email",
+            "password",
+            "is_active",
+        )

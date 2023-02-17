@@ -1,42 +1,73 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from django.contrib.auth.models import Group
 
-# Register your models here.
+from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .models import CustomUser
 
 
-@admin.register(User)
+@admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-    """Custom User Admin"""
-
-    fieldsets = UserAdmin.fieldsets + (
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
+    model = CustomUser
+    list_display = (
+        "email",
+        "first_name",
+        "last_name",
+        "is_staff",
+        "is_active",
+        "language",
+        "currency",
+        "super_host",
+    )
+    list_filter = (
+        "super_host",
+        "currency",
+        "language",
+        "is_staff",
+        "is_active",
+    )
+    fieldsets = (
         (
-            "Custom User Information",
+            "Personal Information",
             {
                 "fields": (
-                    "avatar",
-                    "gender",
-                    "bio",
-                    "birth_date",
-                    "language",
-                    "currency",
+                    "first_name",
+                    "last_name",
+                    "email",
+                    "password",
+                )
+            },
+        ),
+        (
+            "Permissions",
+            {
+                "fields": (
+                    "is_staff",
+                    "is_active",
                     "super_host",
                 )
             },
         ),
     )
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "email",
+                    "password1",
+                    "password2",
+                    "is_staff",
+                    "is_active",
+                ),
+            },
+        ),
+    )
+    search_fields = ("email",)
+    ordering = ("email",)
 
-    list_display = [
-        "username",
-        "first_name",
-        "last_name",
-        "email",
-        "is_active",
-        "language",
-        "currency",
-        "super_host",
-        "is_staff",
-        "is_superuser",
-    ]
 
-    list_filter = UserAdmin.list_filter + ("super_host",)
+admin.site.unregister(Group)

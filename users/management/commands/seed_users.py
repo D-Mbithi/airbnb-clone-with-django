@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django_seed import Seed
-from users.models import User
+
+from users.models import CustomUser
 
 
 class Command(BaseCommand):
@@ -18,7 +19,7 @@ class Command(BaseCommand):
         number = options.get("number")
         seeder = Seed.seeder()
         seeder.add_entity(
-            User,
+            CustomUser,
             number,
             {
                 "is_staff": False,
@@ -26,4 +27,4 @@ class Command(BaseCommand):
             },
         )
         seeder.execute()
-        self.stdout.write(self.style.SUCCESS("Facility created."))
+        self.stdout.write(self.style.SUCCESS("Users created."))

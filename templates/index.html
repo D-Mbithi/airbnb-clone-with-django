@@ -1,16 +1,13 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% load i18n %}
+
 
 {% block title %}
     Home
 {% endblock title %}
 
+
 {% block content %}
-    {% for room in object_list %}
-    <p>
-        <a href="{% url 'rooms:detail' room.id %}">
-            {{ room.name }}
-        </a>
-    </p>
-    {% endfor %}
-    {% include 'partials/pagination.html' %}
-{% endblock content %}
+Index page
+{% endblock %}
