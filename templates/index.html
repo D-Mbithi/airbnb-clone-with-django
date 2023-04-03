@@ -9,5 +9,11 @@
 
 
 {% block content %}
-Index page
+    {% for room in page_obj %}
+        <div>
+            <h3>{{ room.name }}</h3>
+            <p>{{ room.description }}</p>
+        </div>
+    {% endfor %}
+    {% include "partials/pagination.html" %}
 {% endblock %}

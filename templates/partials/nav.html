@@ -3,7 +3,7 @@
 <nav>
     <div class="container">
         <h2>
-            <a href="{% url 'core:home' %}">D-BnB</a>
+            <a href="{% url 'core:home' %}">DjangoBnB</a>
         </h2>
         <ul>
             <li><a href="#">About</a></li>
@@ -12,11 +12,11 @@
         </ul>
         <ul>
             {% if request.user.is_authenticated %}
-            <li><a href="{% url 'users:logout' %}">Logout</a></li>
+            <li><a href="{% url 'account_logout' %}">Logout</a></li>
             {{user.get_full_name}}
             {% else %}
-            <li><a href="{% url 'users:login' %}">Log In</a></li>
-            <li><a href="{% url 'users:signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'account_login' %}">Log In</a></li>
+            <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
             {% endif %}
         </ul>
     </div>
