@@ -1,19 +1,24 @@
 {% extends "base.html" %}
 
+{% load static %}
 {% load i18n %}
 
 
 {% block title %}
-    Home
+Home
 {% endblock title %}
 
 
 {% block content %}
+<section class="container">
     {% for room in page_obj %}
-        <div>
-            <h3>{{ room.name }}</h3>
-            <p>{{ room.description }}</p>
+        <div class="py-4">
+            <h3 class="text-xl text-gray-900">{{ room.name }}</h3>
+            <p class="text-gray-600">{{ room.description }}</p>
         </div>
     {% endfor %}
-    {% include "partials/pagination.html" %}
+    <div class="p-4">
+        {% include "partials/pagination.html" %}
+    </div>
+</section>
 {% endblock %}
