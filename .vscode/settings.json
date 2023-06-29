@@ -1,3 +1,12 @@
 {
-    "python.analysis.typeCheckingMode": "basic"
+  "python.analysis.typeCheckingMode": "basic",
+  "files.autoSave": "onFocusChange",
+  "autopep8.interpreter": ["/home/mbithid/.pyenv/shims/python"],
+  "black-formatter.interpreter": ["/home/mbithid/.pyenv/shims/python"],
+  "flake8.interpreter": ["/home/mbithid/.pyenv/shims/python"],
+  "vsintellicode.features.python.deepLearning": "enabled",
+  "isort.interpreter": ["/home/mbithid/.pyenv/shims/python"],
+  "pylint.interpreter": ["/home/mbithid/.pyenv/shims/python"],
+  "python.defaultInterpreterPath": "/home/mbithid/.pyenv/shims/python",
+  "python.languageServer": "Pylance"
 }
